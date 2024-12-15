@@ -1,0 +1,32 @@
+alias: Tag toggle alarm
+description: ""
+triggers:
+  - trigger: tag
+    tag_id: 04-B4-95-5A-B4-6D-80
+  - trigger: tag
+    tag_id: 04-7E-B7-C2-5E-70-80
+  - trigger: tag
+    tag_id: 70614b09-5895-4a78-b3a9-8e4d80a632f4
+conditions: []
+actions:
+  - if:
+      - condition: device
+        device_id: 5ee73f5174cc95e0be5b4b0cd0b0f009
+        domain: alarm_control_panel
+        entity_id: 6a2db84735adea6d0ee678dab6c54bb2
+        type: is_disarmed
+    then:
+      - action: alarmo.arm
+        metadata: {}
+        data:
+          mode: away
+          skip_delay: false
+          force: false
+          entity_id: alarm_control_panel.alarmo
+          code: "0201"
+    else:
+      - action: alarmo.disarm
+        data:
+          entity_id: alarm_control_panel.alarmo
+          code: "0201"
+mode: restart
